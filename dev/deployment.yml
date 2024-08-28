@@ -34,3 +34,5 @@ spec:
             requests:
               cpu: "0.5"
               memory: "256Mi"
+      imagePullSecrets:
+        - name: oms-registry-secret
