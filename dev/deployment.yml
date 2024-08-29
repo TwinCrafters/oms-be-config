@@ -35,4 +35,4 @@ spec:
               cpu: "0.5"
               memory: "256Mi"
       imagePullSecrets:
-        - name: oms-registry-secret
+        - name: ghcr-login-secret
