@@ -26,7 +26,7 @@ spec:
                   name: oms-user-service-secret
                   key: DATABASE_URL
             - name: GRPC_PORT
-              value: "50051"
+              value: ":50051"
           resources:
             limits:
               cpu: "1"
