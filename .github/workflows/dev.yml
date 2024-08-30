@@ -19,7 +19,7 @@ jobs:
 
       - name: Modify manifest
         run: |
-          sed -i "s+ghcr.io/twincrafters/oms-user-services.*+ghcr.io/twincrafters/oms-user-services:${{ inputs.tag }}+g" test.yml 
+          sed -i "s+ghcr.io/twincrafters/oms-user-services.*+ghcr.io/twincrafters/oms-user-services:${{ inputs.tag }}+g" dev/deployment.yml
 
       - name: Setup git config
         run: |
