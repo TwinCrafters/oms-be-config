@@ -23,14 +23,16 @@ jobs:
 
       - name: Setup git config
         run: |
-          # Setup the workflow to commit as the bot even though it was triggered via a PAT dispatch
-          # https://github.com/actions/checkout/pull/1184
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Commit changes
         run: |
-          # Stage Changes
           git add .
           git commit -m "chore(release): bump dev API image version to ${{ inputs.tag }} [skip ci]"
-          git push origin main
+
+      - name: Push changes
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git push https://${GH_PAT}@github.com/TwinCrafters/oms-be-config.git HEAD:main
