@@ -32,7 +32,5 @@ jobs:
           git commit -m "chore(release): bump dev API image version to ${{ inputs.tag }} [skip ci]"
 
       - name: Push changes
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git push https://${GH_PAT}@github.com/TwinCrafters/oms-be-config.git HEAD:main
+          git push https://${{secrets.GH_PAT}}@github.com/TwinCrafters/oms-be-config.git HEAD:main
