@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: ghcr.io/twincrafters/oms-user-services:latest
+          image: ghcr.io/twincrafters/oms-user-services:sha-6d3c36d
           ports:
             - containerPort: 50051
           env:
