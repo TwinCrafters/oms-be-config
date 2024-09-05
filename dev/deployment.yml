@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: user-service
   labels:
-    app: user-service
+    app: backend-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: user-service
+      app: backend-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: backend-service
     spec:
       containers:
         - name: user-service
@@ -27,6 +27,25 @@ spec:
                   key: DATABASE_URL
             - name: GRPC_PORT
               value: ":50051"
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+        - name: inventory-service
+          image: ghcr.io/twincrafters/oms-inventory-service:latest
+          ports:
+            - containerPort: 9090
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: oms-inventory-service-secret
+                  key: SPRING_DATASOURCE_URL
+            - name: GRPC_SERVER_PORT
+              value: "9090"
           resources:
             limits:
               cpu: "1"

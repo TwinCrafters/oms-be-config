@@ -3,7 +3,12 @@ name: Bump Dev Manifest Image Version
 on:
   workflow_dispatch:
     inputs:
-      tag:
+      user-service-tag:
+        description: Tag for the manifest to point to
+        required: true
+        default: latest
+        type: string
+      inventory-service-tag:
         description: Tag for the manifest to point to
         required: true
         default: latest
@@ -17,9 +22,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Modify manifest
+      - name: Modify user service manifest
+        if: github.event.inputs.user-service-tag != 'latest'
         run: |
-          sed -i "s+ghcr.io/twincrafters/oms-user-services.*+ghcr.io/twincrafters/oms-user-services:${{ inputs.tag }}+g" dev/deployment.yml
+          sed -i "s+ghcr.io/twincrafters/oms-user-services.*+ghcr.io/twincrafters/oms-user-services:${{ inputs.user-service-tag }}+g" dev/deployment.yml
+
+      - name: Modify inventory service manifest
+        if: github.event.inputs.inventory-service-tag != 'latest'
+        run: |
+          sed -i "s+ghcr.io/twincrafters/oms-inventory-services.*+ghcr.io/twincrafters/oms-inventory-service:${{ inputs.inventory-service-tag }}+g" dev/deployment.yml
 
       - name: Setup git config
         run: |
