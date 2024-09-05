@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: user-service
   namespace: oms
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
   selector:
-    app: backend-service
+    app: user-service
   ports:
     - protocol: TCP
       port: 50051
