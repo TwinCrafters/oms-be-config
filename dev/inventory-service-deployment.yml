@@ -4,6 +4,7 @@ metadata:
   name: inventory-service
   labels:
     app: inventory-service
+  namespace: oms
 spec:
   replicas: 2
   selector:
@@ -34,6 +35,6 @@ spec:
             requests:
               cpu: "0.5"
               memory: "256Mi"
-
+      
       imagePullSecrets:
         - name: ghcr-login-secret

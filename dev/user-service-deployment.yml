@@ -4,6 +4,7 @@ metadata:
   name: user-service
   labels:
     app: user-service
+  namespace: oms
 spec:
   replicas: 2
   selector:
